@@ -1,10 +1,17 @@
 package com.techelevator;
 
+import java.util.Scanner;
+
 public class Application {
 
 	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		VendingMachineUI mainMenu = new VendingMachineUI();
+		mainMenu.displayMainMenu();
 
-		System.out.println("Hello World!");
+
+
+
 
 	}
 }
