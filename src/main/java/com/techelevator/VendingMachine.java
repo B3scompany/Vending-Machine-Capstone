@@ -6,12 +6,38 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+
 public class VendingMachine implements Interfaceable{
     List<Item> inventory = new ArrayList<>();
     Map<String, Item> grid = new HashMap<>();
 
+public class VendingMachine {
+
+    public List<Item>inventory = new ArrayList<>();
+
+    public List<Item> inventory = new ArrayList<>();
+
+
+    public VendingMachine() {
+        File file = new File("vendingmachine.csv");
+         try (Scanner scanner = new Scanner(file)){
+             while (scanner.hasNextLine()){
+                 String line = scanner.nextLine();
+                 String words[] = line.split("\\|");
+
+
+                 System.out.println("Item at A1" + );
+
+
+             }
+
+         } catch (FileNotFoundException e) {
+             System.out.println("File not found. ");
+         }
 
     public void vendingMachine() {
+
+
 
 
 
@@ -19,6 +45,7 @@ public class VendingMachine implements Interfaceable{
     public void addInventory(){
 
     }
+
 
 
 

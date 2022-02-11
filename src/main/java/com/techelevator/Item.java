@@ -37,6 +37,8 @@ public class Item {
     }
     public Item(){
 
+
+    public Item(String codePoint, String name, double price, String type){
     }
 
     public String getCodePoint() {
