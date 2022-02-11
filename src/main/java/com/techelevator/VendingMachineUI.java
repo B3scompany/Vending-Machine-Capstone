@@ -8,6 +8,7 @@ public class VendingMachineUI {
     Scanner scanner =  new Scanner(System.in);
     Person customer = new Person(0);
 
+
     public void displayMainMenu(){
         System.out.println();
         System.out.println("Welcome to The Vendo-Matic 800!");
@@ -17,8 +18,13 @@ public class VendingMachineUI {
         System.out.println("What would you like to do? (Type the number):");
         int userChoice = scanner.nextInt();
 
+        VendingMachine vending = new VendingMachine();
+        Inventory inventory = new Inventory();
+        inventory.addToInventory();
+
+
         if(userChoice == 1){
-            System.out.println("1");
+            System.out.println(inventory.getListOfItems());
 
         }else if(userChoice == 2){
             displayPurchaseProcessingMenu();
@@ -36,18 +42,21 @@ public class VendingMachineUI {
         System.out.println("Current Money Provided: ");
         System.out.println("What would you like to do? (Type the number):");
         int userChoice = scanner.nextInt();
+        Inventory inventory = new Inventory();
 
 
         if(userChoice == 1){
             System.out.println("What dollar bill are you putting in? ");
             customer.feedMoney(scanner.nextInt());
-
+            //feed money
         }else if(userChoice == 2){
             System.out.println();
-            //
+            inventory.addToInventory();
+            inventory.displayInventory();
 
         }else if(userChoice == 3){
             System.out.println();
+            //finish transaction
 
         }
 
