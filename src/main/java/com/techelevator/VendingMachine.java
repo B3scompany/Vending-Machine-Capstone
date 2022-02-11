@@ -9,16 +9,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class VendingMachine {
+    public List<Item>inventory = new ArrayList<>();
+
+    public VendingMachine() {
+        File file = new File("vendingmachine.csv");
+         try (Scanner scanner = new Scanner(file)){
+             while (scanner.hasNextLine()){
+                 String line = scanner.nextLine();
+                 String words[] = line.split("\\|");
+
+                 System.out.println("Item at A1" + );
 
 
-        FileReader fileReader = new FileReader("vendingmachine.csv");
-        List<String> snackList = new ArrayList<String>();
-        private List<>
-        public VendingMachine() {
+             }
 
-            while ()
+         } catch (FileNotFoundException e) {
+             System.out.println("File not found. ");
+         }
 
-    }
+
 
 //    private static File getDestinationFileFromUser(Scanner i){
 //        System.out.println("What is the destination file? ");

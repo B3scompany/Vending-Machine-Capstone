@@ -6,6 +6,7 @@ public class Item {
     private double price;
     private String type;
 
+
     public Item(String codePoint, String name, double price, String type){
         this.codePoint = codePoint;
         this.name = name;
