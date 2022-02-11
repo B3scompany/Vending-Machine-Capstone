@@ -21,11 +21,12 @@ public class VendingMachineUI {
         VendingMachine vending = new VendingMachine();
         Inventory inventory = new Inventory();
         inventory.addToInventory();
+        Item item = new Item();
 
 
         if(userChoice == 1){
-            System.out.println(inventory.getListOfItems());
-
+            //inventory.displayInventory();
+            item.displayNameAndStock();
         }else if(userChoice == 2){
             displayPurchaseProcessingMenu();
             //display purchasing process menu
@@ -39,20 +40,35 @@ public class VendingMachineUI {
         System.out.println(">(1) Feed Money");
         System.out.println(">(2) Select Product");
         System.out.println(">(3) Finish Transaction");
-        System.out.println("Current Money Provided: ");
         System.out.println("What would you like to do? (Type the number):");
         int userChoice = scanner.nextInt();
+
         Inventory inventory = new Inventory();
+        VendingMachine vendingMachine = new VendingMachine();
+        Test test = new Test();
 
 
         if(userChoice == 1){
-            System.out.println("What dollar bill are you putting in? ");
-            customer.feedMoney(scanner.nextInt());
+            System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
+            int dollarBill = scanner.nextInt();
+            customer.feedMoney(dollarBill);
+
+            while(customer.getCurrentMoneyProvided() <= 30){
+            System.out.println("Would you like to add more money? (Y/N)");
+            String yesOrNo = scanner.nextLine();
+            if(yesOrNo.equalsIgnoreCase("y")){
+                System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
+                dollarBill = scanner.nextInt();
+                customer.feedMoney(dollarBill);
+            }
+            }
             //feed money
         }else if(userChoice == 2){
             System.out.println();
             inventory.addToInventory();
             inventory.displayInventory();
+
+
 
         }else if(userChoice == 3){
             System.out.println();

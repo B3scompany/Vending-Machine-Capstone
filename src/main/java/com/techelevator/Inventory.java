@@ -12,9 +12,7 @@ public class Inventory {
 
     public Inventory(Item item) {
         this.item = item;
-
     }
-
     public Inventory() {
 
     }
@@ -31,9 +29,7 @@ public class Inventory {
         for (String name : listOfItems) {
             System.out.println(name);
         }
-
     }
-
     public void addToInventory() {
 
         File file = new File("vendingmachine.csv");
@@ -42,12 +38,9 @@ public class Inventory {
                 String line = scanner.nextLine();
                 String[] words = line.split("\\|");
                 listOfItems.add(words[1]);
-
             }
-
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
         }
-
     }
 }

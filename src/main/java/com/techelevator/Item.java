@@ -2,6 +2,9 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Item {
@@ -12,22 +15,19 @@ public class Item {
     private int stock = 5;
 
     public Item(String codePoint, String name, double price, String type, int stock){
-//        this.codePoint = codePoint;
-//        this.name = name;
-//        this.price = price;
-//        this.type = type;
-//        this.stock = stock;
-
+        this.codePoint = codePoint;
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.stock = stock;
 
         File file = new File("vendingmachine.csv");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] words = line.split("\\|");
-                this.codePoint = words[0];
-                this.name = words[1];
-                this.price = Double.parseDouble(words[2]);
-                this.type = words[3];
+                new Item(words[0], words[1], Double.parseDouble(words[2]), words[3], 5);
+
             }
 
         } catch (FileNotFoundException e) {
@@ -35,7 +35,7 @@ public class Item {
         }
 
     }
-    public Item(String name){
+    public Item(){
 
     }
 
@@ -55,9 +55,7 @@ public class Item {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
-    }
+    public double getPrice() { return price; }
 
     public void setPrice(double price) {
         this.price = price;
@@ -70,11 +68,31 @@ public class Item {
     public void setType(String type) {
         this.type = type;
     }
+
     public int getStock(){
         return stock;
     }
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public void displayNameAndStock(){
+        Map<String, Integer> nameAndStock = new HashMap<>();
+
+        File file = new File("vendingmachine.csv");
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] words = line.split("\\|");
+                nameAndStock.put(words[1], 5);
+
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+            for(String key : nameAndStock.keySet()){
+                System.out.println("("+key+")" + " Amount left: " + nameAndStock.get(key));
+            }
     }
 }
