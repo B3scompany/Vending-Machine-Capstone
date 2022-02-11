@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class VendingMachine {
+<<<<<<< HEAD
     public List<Item>inventory = new ArrayList<>();
+=======
+    public List<Item> inventory = new ArrayList<>();
+>>>>>>> 47b3f9fbd107d8547d4a1a576e2fbae6135a60cd
 
     public VendingMachine() {
         File file = new File("vendingmachine.csv");
@@ -18,6 +22,7 @@ public class VendingMachine {
                  String line = scanner.nextLine();
                  String words[] = line.split("\\|");
 
+<<<<<<< HEAD
                  System.out.println("Item at A1" + );
 
 
@@ -26,20 +31,11 @@ public class VendingMachine {
          } catch (FileNotFoundException e) {
              System.out.println("File not found. ");
          }
+=======
+    public void vendingMachine() {
+>>>>>>> 47b3f9fbd107d8547d4a1a576e2fbae6135a60cd
 
 
 
-//    private static File getDestinationFileFromUser(Scanner i){
-//        System.out.println("What is the destination file? ");
-//        String path = i.nextLine();
-//
-//        File destinationFile = new File(path);
-//        try {
-//            destinationFile.createNewFile();
-//        }
-//        catch (IOException e) {
-//            System.out.println("Cant access file");
-//        }
-//        return destinationFile;
-//    }
+
 }
