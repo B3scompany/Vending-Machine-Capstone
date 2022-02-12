@@ -1,41 +1,61 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class VendingMachine {
-<<<<<<< HEAD
-    public List<Item>inventory = new ArrayList<>();
-=======
-    public List<Item> inventory = new ArrayList<>();
->>>>>>> 47b3f9fbd107d8547d4a1a576e2fbae6135a60cd
+
+public class VendingMachine implements Interfaceable{
 
     public VendingMachine() {
-        File file = new File("vendingmachine.csv");
-         try (Scanner scanner = new Scanner(file)){
-             while (scanner.hasNextLine()){
-                 String line = scanner.nextLine();
-                 String words[] = line.split("\\|");
 
-<<<<<<< HEAD
-                 System.out.println("Item at A1" + );
-
-
-             }
-
-         } catch (FileNotFoundException e) {
-             System.out.println("File not found. ");
-         }
-=======
-    public void vendingMachine() {
->>>>>>> 47b3f9fbd107d8547d4a1a576e2fbae6135a60cd
+    }
 
 
 
+    public Map<String, Item> vendingMachine() {
+        Map<String, Item> codePointAndItem = new TreeMap<>();
+        Inventory inventory = new Inventory();
+        List<Item> testList = new ArrayList<>();
+        testList.addAll(inventory.createInventory());
 
+        for (Item walt : testList) {
+            codePointAndItem.put(walt.getCodePoint(), walt);
+
+        }
+        for(String codePoint : codePointAndItem.keySet()){
+            System.out.println(codePoint + ") " + codePointAndItem.get(codePoint).getName() + " || Price: $" +
+                    codePointAndItem.get(codePoint).getPrice() + " || Quantity left: "
+                    + codePointAndItem.get(codePoint).getStock());
+        }
+        return codePointAndItem;
+
+    }
+    public void addInventory(){
+
+    }
+
+
+
+
+    @Override
+    public void getCodePoint() {
+
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public double getPurchasePrice() {
+        return 0;
+    }
+
+    @Override
+    public String getType() {
+        return null;
+    }
 }
