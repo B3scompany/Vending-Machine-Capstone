@@ -2,7 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Test {
     public Test(){
@@ -22,6 +22,20 @@ public class Test {
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
         }
+
+    }
+    public void multipleMaps(){
+        Map<String, Item> codePointAndItem = new HashMap<>();
+        Inventory inventory = new Inventory();
+        List<Item> testList = new ArrayList<>();
+        testList.addAll(inventory.createInventory());
+        for(Item walt : testList){
+            codePointAndItem.put(walt.getCodePoint(), walt);
+        }
+
+
+
+
 
     }
 

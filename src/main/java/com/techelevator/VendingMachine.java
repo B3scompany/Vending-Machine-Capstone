@@ -8,64 +8,58 @@ import java.util.*;
 
 
 public class VendingMachine implements Interfaceable{
-    List<Item> inventory = new ArrayList<>();
-    Map<String, Item> grid = new HashMap<>();
+    private Map<String, Item> inventory = new TreeMap<>();
 
-public class VendingMachine {
+    public VendingMachine(){
 
-    public List<Item>inventory = new ArrayList<>();
+    }
+    public Map<String, Item> displayInventory() {
+        Map<String, Item> codePointAndItem = new TreeMap<>();
+        Inventory inventory = new Inventory();
+        List<Item> inventoryToMap = new ArrayList<>();
+        inventoryToMap.addAll(inventory.createInventory());
 
-    public List<Item> inventory = new ArrayList<>();
-
-
-    public VendingMachine() {
-        File file = new File("vendingmachine.csv");
-         try (Scanner scanner = new Scanner(file)){
-             while (scanner.hasNextLine()){
-                 String line = scanner.nextLine();
-                 String words[] = line.split("\\|");
-
-
-                 System.out.println("Item at A1" + );
-
-
-             }
-
-         } catch (FileNotFoundException e) {
-             System.out.println("File not found. ");
-         }
-
-    public void vendingMachine() {
-
-
-
-
-
+        for (Item walt : inventoryToMap) {
+            codePointAndItem.put(walt.getCodePoint(), walt);
+        }
+        for(String codePoint : codePointAndItem.keySet()){
+            String name = codePointAndItem.get(codePoint).getName();
+            double price = codePointAndItem.get(codePoint).getPrice();
+            int stock = codePointAndItem.get(codePoint).getStock();
+            System.out.println(codePoint + ") " + name + " || Price: $" + price + " || Quantity left: " + stock);
+        }
+        return codePointAndItem;
     }
     public void addInventory(){
 
     }
+    public void dispenseItem(Item item){
+        System.out.println("'" + item.getName() + "'  Cost: $" + item.getPrice());
+        item.setStock(item.getStock() - 1);
+        if(item.getType().equalsIgnoreCase("chip")){
+            System.out.println("Crunch Crunch, Walt!");
+        }else if(item.getType().equalsIgnoreCase("candy")){
+            System.out.println("Munch Munch, Walt!");
+        }else if(item.getType().equalsIgnoreCase("drink")){
+            System.out.println("Glug Glug, Walt!");
+        }else if(item.getType().equalsIgnoreCase("gum")){
+            System.out.println("Chew Chew, Walt!");
+        }
+
+    }
+    public void finishTransaction(){
 
 
+    }
+    public void updateStock(Item item){
+        item.setStock(item.getStock() - 1);
+
+    }
 
 
     @Override
     public void getCodePoint() {
-        List<String> codePoints = new ArrayList<>();
 
-        File file = new File("vendingmachine.csv");
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] words = line.split("\\|");
-                codePoints.add(words[0]);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-        }
-        for(String codePoint : codePoints){
-            System.out.println(codePoint);
-        }
     }
 
     @Override

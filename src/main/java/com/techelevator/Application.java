@@ -7,7 +7,8 @@ public class Application {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		Item item = new Item();
-		VendingMachine vending = new VendingMachine();
+		Inventory inventory = new Inventory();
+		inventory.createInventory();
 		VendingMachineUI mainMenu = new VendingMachineUI();
 		mainMenu.displayMainMenu();
 

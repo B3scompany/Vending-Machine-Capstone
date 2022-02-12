@@ -2,17 +2,16 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Inventory {
-    private List<String> listOfItems = new ArrayList<>();
+    private List<Item> listOfItems = new ArrayList<>();
     private Item item;
 
-    public Inventory(Item item) {
-        this.item = item;
+    public Inventory(List<Item> listOfItems) {
+        this.listOfItems = listOfItems;
     }
+
     public Inventory() {
 
     }
@@ -21,26 +20,32 @@ public class Inventory {
         return item;
     }
 
-    public List<String> getListOfItems() {
+    public List<Item> getListOfItems() {
         return listOfItems;
     }
 
-    public void displayInventory() {
-        for (String name : listOfItems) {
-            System.out.println(name);
-        }
+    public void addToInventory(Item item) {
+        //Will change when we figure out the item class
+        listOfItems.add(item);
     }
-    public void addToInventory() {
-
+    public List<Item> createInventory(){
         File file = new File("vendingmachine.csv");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
+                Item item = new Item();
                 String line = scanner.nextLine();
                 String[] words = line.split("\\|");
-                listOfItems.add(words[1]);
+                item.setCodePoint(words[0]);
+                item.setName(words[1]);
+                item.setPrice(Double.parseDouble(words[2]));
+                item.setType(words[3]);
+                item.setStock(5);
+                listOfItems.add(item);
             }
+
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
-        }
+        } return listOfItems;
     }
+
 }
