@@ -2,10 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Inventory {
     private List<Item> listOfItems = new ArrayList<>();
@@ -27,12 +24,6 @@ public class Inventory {
         return listOfItems;
     }
 
-    public void displayInventory() {
-        for (Item itemName : listOfItems) {
-            System.out.println(itemName.getCodePoint() + ") " + itemName.getName() + "|| Price: $" +
-                    itemName.getPrice() + " || Quantity left: " + itemName.getStock());
-        }
-    }
     public void addToInventory(Item item) {
         //Will change when we figure out the item class
         listOfItems.add(item);

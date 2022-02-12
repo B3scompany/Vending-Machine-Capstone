@@ -2,11 +2,18 @@ package com.techelevator;
 
 public class Person {
     private double currency;
-    private int currentMoneyProvided;
+    private double currentMoneyProvided;
 
     public Person(double currency){
         this.currency = currency;
 
+    }
+    public Person(){
+
+    }
+
+    public void setCurrentMoneyProvided(double currentMoneyProvided) {
+        this.currentMoneyProvided = currentMoneyProvided;
     }
 
     public double getCurrency() {
@@ -17,28 +24,27 @@ public class Person {
         this.currency = currency;
     }
 
-    public int getCurrentMoneyProvided() {return currentMoneyProvided;}
+    public double getCurrentMoneyProvided() {return currentMoneyProvided;}
 
-    public int feedMoney(int moneyFed) {
-
-//        do{
-//            currentMoneyProvided += moneyFed;
-//            System.out.println("Current Money Provided: " + currentMoneyProvided);
-//
-//        }while(currentMoneyProvided <= 30 && moneyFed <= 10);
+    public void feedMoney(int moneyFed) {
 
         while (moneyFed <= 10) {
-            currentMoneyProvided += moneyFed;
-            if (currentMoneyProvided > 30) {
-                currentMoneyProvided = currentMoneyProvided - moneyFed;
-                System.out.println("Current Money Provided: " + currentMoneyProvided);
-                System.out.println("You spent too much already.");
-                break;
+            if((moneyFed == 1 || moneyFed == 2 || moneyFed == 5 || moneyFed == 10)) {
+                currentMoneyProvided += moneyFed;
+                if (currentMoneyProvided > 30) {
+                    currentMoneyProvided = currentMoneyProvided - moneyFed;
+                    System.out.println("You spent too much already.");
+                    break;
+                }
+            }else{
+                System.out.println("$" + moneyFed + " is not a real bill.");
             }
-            System.out.println("Current Money Provided: " + currentMoneyProvided);
-            break;
+
+                break;
         }
-        return currentMoneyProvided;
+
+
     }
 
-}
+    }
+

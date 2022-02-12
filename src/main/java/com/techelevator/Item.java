@@ -56,9 +56,9 @@ public class Item extends Inventory{
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
         }
-        for(String key : nameAndStock.keySet()){
-            System.out.println("("+key+")" + " Amount left: " + nameAndStock.get(key));
-        }
+            for(String key : nameAndStock.keySet()){
+                System.out.println("("+key+")" + " Amount left: " + nameAndStock.get(key));
+            }
     }
     public void displayPrice(){
         super.createInventory();
