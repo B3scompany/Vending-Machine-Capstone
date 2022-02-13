@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import com.sun.security.jgss.GSSUtil;
 import jdk.swing.interop.SwingInterOpUtils;
 
 import java.util.*;
@@ -60,32 +61,32 @@ public class VendingMachineUI {
 
         if (userChoice.equalsIgnoreCase("1")) {
             String yesOrNo = "";
-            System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
-            dollarBill = scanner.nextInt();
-
-            if (dollarBill == 1 || dollarBill == 2 || dollarBill == 5 || dollarBill == 10) {
-                if (dollarBill > 10) {
-                    System.out.println("Enter a smaller bill.");
-                    displayPurchaseProcessingMenu();
-                }
-                customer.feedMoney(dollarBill);
-                System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
-                do {
-                    System.out.println("Would you like to add more money? (Y/N)");
-                    yesOrNo = scanner.next();
-                    if (!yesOrNo.equalsIgnoreCase("y")) {
-                        displayPurchaseProcessingMenu();
-                        break;
-                    }
-                    System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
+                System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
                     dollarBill = scanner.nextInt();
-                    customer.feedMoney(dollarBill);
-                    System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
-                } while (yesOrNo.equalsIgnoreCase("y"));
-            } else {
-                System.out.println("Enter a valid bill.");
-                displayPurchaseProcessingMenu();
-            }
+                    if (dollarBill == 1 || dollarBill == 2 || dollarBill == 5 || dollarBill == 10) {
+                        if (dollarBill > 10) {
+                            System.out.println("Enter a smaller bill.");
+                            displayPurchaseProcessingMenu();
+                        }
+                        customer.feedMoney(dollarBill);
+                        System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
+                        do {
+                            System.out.println("Would you like to add more money? (Y/N)");
+                            yesOrNo = scanner.next();
+                            if (!yesOrNo.equalsIgnoreCase("y")) {
+                                displayPurchaseProcessingMenu();
+                                break;
+                            }
+                            System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
+                            dollarBill = scanner.nextInt();
+                            customer.feedMoney(dollarBill);
+                            System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
+                        } while (yesOrNo.equalsIgnoreCase("y"));
+                    } else {
+                        System.out.println("Enter a valid bill.");
+                        displayPurchaseProcessingMenu();
+                    }
+
 
 
             //feed money
@@ -97,6 +98,7 @@ public class VendingMachineUI {
             System.out.println("What do you want to buy? Select an option between A1 --> D4: ");
             System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
             String pickedItem = scanner.next();
+            pickedItem.toUpperCase();
             for (String choice : purchaseMenu.keySet()) {
                 if(pickedItem.equalsIgnoreCase(choice)) {
                     if (customer.getCurrentMoneyProvided() < purchaseMenu.get(choice).getPrice()) {
@@ -112,22 +114,22 @@ public class VendingMachineUI {
                         vendingMachine.updateStock(purchaseMenu.get(choice));
 
                         displayPurchaseProcessingMenu();
-
                     }
                 }
-
+            }if(!purchaseMenu.containsKey(pickedItem)){
+                System.out.println("Item doesn't exist");
+                displayPurchaseProcessingMenu();
             }
         }
         else if(userChoice.equalsIgnoreCase("3")){
             System.out.println();
             //finish transaction
 
-        }else{
+        }
+        else{
             System.out.println("Choose the number of the option you want. ");
             displayPurchaseProcessingMenu();
         }
-
-
 
     }
 }

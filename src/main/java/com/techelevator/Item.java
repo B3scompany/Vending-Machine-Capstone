@@ -63,9 +63,9 @@ public class Item extends Inventory{
     public void displayPrice(){
         super.createInventory();
         List<Item> items = super.getListOfItems();
-
-
-
+    }
+    public void updateStock(Item item){
+        item.setStock(item.getStock() - 1);
 
     }
 }

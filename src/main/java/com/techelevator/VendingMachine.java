@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class VendingMachine implements Interfaceable{
+public class VendingMachine{
     private Map<String, Item> inventory = new TreeMap<>();
+
+    public VendingMachine(Map<String, Item> inventory){
+        this.inventory = inventory;
+    }
 
     public VendingMachine(){
 
@@ -26,6 +30,7 @@ public class VendingMachine implements Interfaceable{
             String name = codePointAndItem.get(codePoint).getName();
             double price = codePointAndItem.get(codePoint).getPrice();
             int stock = codePointAndItem.get(codePoint).getStock();
+
             System.out.println(codePoint + ") " + name + " || Price: $" + price + " || Quantity left: " + stock);
         }
         return codePointAndItem;
@@ -56,24 +61,4 @@ public class VendingMachine implements Interfaceable{
 
     }
 
-
-    @Override
-    public void getCodePoint() {
-
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public double getPurchasePrice() {
-        return 0;
-    }
-
-    @Override
-    public String getType() {
-        return null;
-    }
 }

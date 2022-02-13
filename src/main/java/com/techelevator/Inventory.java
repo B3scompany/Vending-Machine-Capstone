@@ -39,7 +39,7 @@ public class Inventory {
                 item.setName(words[1]);
                 item.setPrice(Double.parseDouble(words[2]));
                 item.setType(words[3]);
-                item.setStock(5);
+
                 listOfItems.add(item);
             }
 
