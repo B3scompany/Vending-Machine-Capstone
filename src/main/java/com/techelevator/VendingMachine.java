@@ -93,17 +93,7 @@ public class VendingMachine extends Inventory{
         }
 
     }
-<<<<<<< HEAD
-=======
-    public void finishTransaction(){
 
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    }
->>>>>>> 8b532d04e09ccdb9e7a3fc0aff1d955ad720fd74
     public void updateStock(Item item){
         if(item.getStock() <= 0){
             System.out.println("This is sold out!");
@@ -112,7 +102,7 @@ public class VendingMachine extends Inventory{
 
     }
 
-    public void returnChange(Person customer){
+    public void returnChange(Person customer) {
         double quarter = 0.25;
         double dime = 0.10;
         double nickel = 0.05;
@@ -121,17 +111,26 @@ public class VendingMachine extends Inventory{
         int amountOfNickels = 0;
 
         double money = customer.getCurrentMoneyProvided();
+        money = (Math.round(money * 100.0)/100.0);
+        while(money > 0) {
+            money = (Math.round(money * 100.0)/100.0);
 
-        if(money % quarter == 0) {
-            amountOfQuarters = (int) (money / quarter);
-        }else {
-
-            while (money > 0) {
-                
+            if (!(money % quarter > 0)) {
+                money = money - quarter;
+                amountOfQuarters++;
+            }else if (!(money % dime > 0)) {
+                money = money - dime;
+                amountOfDimes++;
+            }else if (!(money % nickel == 0)) {
+                money = money - nickel;
+                amountOfNickels++;
+            }
+            if(amountOfNickels % 2 == 0 && amountOfNickels >= 2){
+                amountOfDimes += amountOfNickels / 2;
+                amountOfNickels -= 2;
 
             }
         }
-
 
 
         System.out.println("Here is " + amountOfQuarters + " Quarters, " + amountOfDimes + " dimes, "

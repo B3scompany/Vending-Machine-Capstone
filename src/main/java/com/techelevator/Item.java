@@ -61,12 +61,5 @@ public class Item extends Inventory{
             }
     }
 
-<<<<<<< HEAD
-}
-=======
-
-
-
     }
-}
->>>>>>> 8b532d04e09ccdb9e7a3fc0aff1d955ad720fd74
+
