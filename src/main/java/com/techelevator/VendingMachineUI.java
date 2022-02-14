@@ -10,126 +10,171 @@ public class VendingMachineUI {
     Person customer = new Person(0);
     VendingMachine vendingMachine = new VendingMachine();
     Map<String, Item> purchaseMenu = new TreeMap<>();
+    Inventory inventory = new Inventory();
 
 
+    public void displayMainMenu() {
+        Inventory inventory = new Inventory();
+        List<Item> listOfItems = new ArrayList<>();
+        listOfItems.addAll(inventory.createInventory());
 
-    public void displayMainMenu(){
         System.out.println();
-//        VendingMachine vendingMachine = new VendingMachine();
         System.out.println("Welcome to The Vendo-Matic 800!");
         System.out.println("> (1) Display Vending Machine Items");
         System.out.println("> (2) Purchase");
         System.out.println("> (3) Exit");
-        System.out.println("What would you like to do? (Type the number):");
-        String userChoice = scanner.next();
+        System.out.print("What would you like to do? (Type the number):");
 
-        VendingMachine vending = new VendingMachine();
-        Inventory inventory = new Inventory();
-        Item item = new Item();
-        List<Item> listOfItems = new ArrayList<>();
-        listOfItems.addAll(inventory.createInventory());
+            String userChoice = scanner.nextLine();
+            if(userChoice.isEmpty()){
+                System.out.println("Quit trying to break me!");
+                System.out.println("Type 1, 2 OR 3");
+                displayMainMenu();
+            }
 
+            if (userChoice.equalsIgnoreCase("1")) {
+                vendingMachine.displayInventory();
+                displayMainMenu();
 
+            } else if (userChoice.equalsIgnoreCase("2")) {
+                displayPurchaseProcessingMenu();
 
-        if(userChoice.equalsIgnoreCase("1")){
-            vending.displayInventory();
-            displayMainMenu();
-
-        }else if(userChoice.equalsIgnoreCase("2")){
-            displayPurchaseProcessingMenu();
-            //display purchasing process menu
-        }else if(userChoice.equalsIgnoreCase("3")) {
-            System.out.println("Goodbye.");
-            System.exit(1);
-        }else{
-            System.out.println("Quit trying to break me...");
-            displayMainMenu();
+            } else if (userChoice.equalsIgnoreCase("3")) {
+                System.out.println("Goodbye.");
+                System.exit(1);
+            }
+            if (!userChoice.equalsIgnoreCase("1") && !userChoice.equalsIgnoreCase("2") && !userChoice.equalsIgnoreCase("3")) {
+                System.out.println("Quit trying to break me...");
+                System.out.println("Type 1, 2 OR 3");
+                displayMainMenu();
         }
     }
     public void displayPurchaseProcessingMenu() {
+        System.out.println();
         System.out.println("*** PURCHASE PROCESSING ***");
         System.out.println(">(1) Feed Money ($30 LIMIT)");
         System.out.println(">(2) Select Product");
         System.out.println(">(3) Finish Transaction");
         System.out.println();
-        System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
-        System.out.println("What would you like to do? (Type the number):");
-        Inventory inventory = new Inventory();
-        String userChoice = scanner.next();
-        int dollarBill = 0;
+        System.out.println("Spendable Money: $" + String.format("%.2f", customer.getCurrentMoneyProvided()));
+        System.out.print("What would you like to do? (Type the number):");
 
+        String userChoice = scanner.nextLine();
+        String userDollar = "";
+
+        if(userChoice.isEmpty()){
+            System.out.println("Quit trying to break me!");
+            System.out.println("Type 1, 2 OR 3");
+            displayPurchaseProcessingMenu();
+        }
 
         if (userChoice.equalsIgnoreCase("1")) {
             String yesOrNo = "";
-                System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
-                    dollarBill = scanner.nextInt();
-                    if (dollarBill == 1 || dollarBill == 2 || dollarBill == 5 || dollarBill == 10) {
+
+            System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
+
+            try {
+                userDollar = scanner.nextLine();
+                int dollarBill = Integer.parseInt(userDollar);
+                if (dollarBill > 10) {
+                    System.out.println("Enter a smaller bill.");
+                    displayPurchaseProcessingMenu();
+                }
+                if (dollarBill == 1 || dollarBill == 2 || dollarBill == 5 || dollarBill == 10) {
+                    customer.feedMoney(dollarBill);
+                    vendingMachine.returnAudit(customer);
+                    System.out.println("Spendable Money: $" + String.format("%.2f", customer.getCurrentMoneyProvided()));
+                    do {
+                        System.out.print("Would you like to add more money? (Y/N)");
+                        yesOrNo = scanner.nextLine();
+                        if (yesOrNo.isEmpty()) {
+                            System.out.println("You didn't enter anything..");
+                            System.out.println("Enter 1, 2, 5 or 10.");
+                        }
+                        if (!yesOrNo.equalsIgnoreCase("y")) {
+                            System.out.println("Back to the menu!");
+                            displayPurchaseProcessingMenu();
+                            break;
+                        }
+                            System.out.print("What dollar bill are you putting in? (1, 2, 5 or 10) ");
+                            userDollar = scanner.nextLine();
+                            dollarBill = Integer.parseInt(userDollar);
                         if (dollarBill > 10) {
                             System.out.println("Enter a smaller bill.");
                             displayPurchaseProcessingMenu();
                         }
-                        customer.feedMoney(dollarBill);
-                        System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
-                        do {
-                            System.out.println("Would you like to add more money? (Y/N)");
-                            yesOrNo = scanner.next();
-                            if (!yesOrNo.equalsIgnoreCase("y")) {
-                                displayPurchaseProcessingMenu();
-                                break;
-                            }
-                            System.out.println("What dollar bill are you putting in? (1, 2, 5 or 10) ");
-                            dollarBill = scanner.nextInt();
                             customer.feedMoney(dollarBill);
-                            System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
-                        } while (yesOrNo.equalsIgnoreCase("y"));
-                    } else {
-                        System.out.println("Enter a valid bill.");
-                        displayPurchaseProcessingMenu();
-                    }
+                            vendingMachine.returnAudit(customer);
+                            System.out.println("Spendable Money: $" + String.format("%.2f", customer.getCurrentMoneyProvided()));
 
-
-
-            //feed money
+                    } while (yesOrNo.equalsIgnoreCase("y"));
+                } else {
+                    System.out.println("Enter a valid bill. (1, 2, 5, 10)");
+                    displayPurchaseProcessingMenu();
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Quit trying to break me..");
+                System.out.println("Enter either 1, 2, 5 or 10");
+                displayPurchaseProcessingMenu();
+            }catch (InputMismatchException e){
+                System.out.println("Quit trying to break me..");
+            }
         } else if (userChoice.equalsIgnoreCase("2")) {
-            vendingMachine.displayInventory();
             purchaseMenu.putAll(vendingMachine.displayInventory());
+
 
             System.out.println();
             System.out.println("What do you want to buy? Select an option between A1 --> D4: ");
-            System.out.println("Spendable Money: $" + customer.getCurrentMoneyProvided());
-            String pickedItem = scanner.next();
-            pickedItem.toUpperCase();
+            System.out.println("Spendable Money: $" + String.format("%.2f", customer.getCurrentMoneyProvided()));
+            String pickedItem = scanner.nextLine();
+
+            if(pickedItem.isEmpty()){
+                System.out.println("You didn't pick anything!");
+//                displayPurchaseProcessingMenu();
+            }
             for (String choice : purchaseMenu.keySet()) {
-                if(pickedItem.equalsIgnoreCase(choice)) {
+
+                if (pickedItem.equalsIgnoreCase(choice)) {
                     if (customer.getCurrentMoneyProvided() < purchaseMenu.get(choice).getPrice()) {
                         System.out.println("Get your money up.");
-                        System.out.println("You have: $" + customer.getCurrentMoneyProvided());
-                        System.out.println("You need: $" + purchaseMenu.get(choice).getPrice());
+                        System.out.println("You have: $" + String.format("%.2f", customer.getCurrentMoneyProvided()));
+                        System.out.println("You need: $" + String.format("%.2f", purchaseMenu.get(choice).getPrice()));
                         displayPurchaseProcessingMenu();
                     }
-                    if (purchaseMenu.get(choice).getStock() > 0) {
+                    if(purchaseMenu.get(choice).getStock() <= 0){
+                        System.out.println("This is sold out!");
+                        displayPurchaseProcessingMenu();
+                    }
                         vendingMachine.dispenseItem(purchaseMenu.get(choice)); //prints name and price
+                        vendingMachine.purchaseAudit(purchaseMenu.get(choice), customer);
                         double moneyRemaining = customer.getCurrentMoneyProvided() - purchaseMenu.get(choice).getPrice();
                         customer.setCurrentMoneyProvided(moneyRemaining);
                         vendingMachine.updateStock(purchaseMenu.get(choice));
-
                         displayPurchaseProcessingMenu();
-                    }
+
+
                 }
-            }if(!purchaseMenu.containsKey(pickedItem)){
+            }
+            if (!purchaseMenu.containsKey(pickedItem)) {
                 System.out.println("Item doesn't exist");
                 displayPurchaseProcessingMenu();
             }
         }
-        else if(userChoice.equalsIgnoreCase("3")){
-            System.out.println();
-            //finish transaction
+        else if (userChoice.equalsIgnoreCase("3")) {
+
+            System.out.println("Change to be given back: " +  String.format("%.2f", customer.getCurrentMoneyProvided()));
+            vendingMachine.returnMoneyAudit(inventory.getItem(), customer);
+            vendingMachine.returnChange(customer);
+            customer.setCurrentMoneyProvided(0);
+            displayMainMenu();
 
         }
-        else{
-            System.out.println("Choose the number of the option you want. ");
+        else if(!userChoice.equalsIgnoreCase("1") && !userChoice.equalsIgnoreCase("2") && !userChoice.equalsIgnoreCase("3")){
+            System.out.println("Quit trying to break me...");
+            System.out.println("Type 1, 2 or 3");
             displayPurchaseProcessingMenu();
         }
+
 
     }
 }

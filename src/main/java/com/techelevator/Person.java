@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Person {
     private double currency;
     private double currentMoneyProvided;
+    private double moneyFed;
 
     public Person(double currency){
         this.currency = currency;
@@ -29,8 +30,12 @@ public class Person {
 
     public double getCurrentMoneyProvided() {return currentMoneyProvided;}
 
-    public void feedMoney(int moneyFed) {
+    public double getMoneyFed() {
+        return moneyFed;
+    }
 
+    public void feedMoney(int moneyFed) {
+            this.moneyFed = moneyFed;
         while (moneyFed <= 10) {
             if((moneyFed == 1 || moneyFed == 2 || moneyFed == 5 || moneyFed == 10)) {
                 currentMoneyProvided += moneyFed;
@@ -42,7 +47,6 @@ public class Person {
             }else{
                 System.out.println("$" + moneyFed + " is not a real bill.");
             }
-
                 break;
         }
 

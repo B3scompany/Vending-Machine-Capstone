@@ -9,7 +9,7 @@ public class Item extends Inventory{
     private String name;
     private double price;
     private String type;
-    private int stock = 5;
+    public int stock = 5;
 
     public Item(String codePoint, String name, double price, String type, int stock){
         this.codePoint = codePoint;
@@ -60,12 +60,5 @@ public class Item extends Inventory{
                 System.out.println("("+key+")" + " Amount left: " + nameAndStock.get(key));
             }
     }
-    public void displayPrice(){
-        super.createInventory();
-        List<Item> items = super.getListOfItems();
-    }
-    public void updateStock(Item item){
-        item.setStock(item.getStock() - 1);
 
-    }
 }

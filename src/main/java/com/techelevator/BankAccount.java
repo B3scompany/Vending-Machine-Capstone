@@ -8,4 +8,5 @@ public class BankAccount {
     public BankAccount(int accountBalance){
         this.accountBalance = accountBalance;
     }
+
 }

@@ -5,16 +5,10 @@ import java.util.Scanner;
 public class Application {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		Item item = new Item();
+		System.out.println(6.95 % 0.05);
 		Inventory inventory = new Inventory();
 		inventory.createInventory();
-		VendingMachineUI mainMenu = new VendingMachineUI();
-		mainMenu.displayMainMenu();
-
-
-
-
-
+		VendingMachineUI menus = new VendingMachineUI();
+		menus.displayMainMenu();
 	}
 }

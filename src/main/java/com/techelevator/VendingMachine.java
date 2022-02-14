@@ -1,46 +1,87 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-public class VendingMachine{
-    private Map<String, Item> inventory = new TreeMap<>();
+public class VendingMachine extends Inventory{
+        public Map<String, Item> codePointAndItem = new TreeMap<>();
+        public List<Item> inventory = new ArrayList<>(super.createInventory());
 
-    public VendingMachine(Map<String, Item> inventory){
-        this.inventory = inventory;
+    public VendingMachine(Map<String, Item> codePointAndItem){
+        this.codePointAndItem = codePointAndItem;
     }
 
     public VendingMachine(){
 
     }
-    public Map<String, Item> displayInventory() {
-        Map<String, Item> codePointAndItem = new TreeMap<>();
-        Inventory inventory = new Inventory();
-        List<Item> inventoryToMap = new ArrayList<>();
-        inventoryToMap.addAll(inventory.createInventory());
+    public void returnAudit(Person customer) {
+        File auditFile = new File("log.txt");
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss ");
+        {
+            try (FileWriter fileWriter = new FileWriter(auditFile, true)) {
+                BufferedReader buffRead = new BufferedReader(new FileReader("log.txt"));
+                PrintWriter writer = new PrintWriter(fileWriter);
+                writer.println(format.format(date) + " feed money " + " $ " + String.format("%.2f",customer.getMoneyFed()) + " " + " $ " + String.format("%.2f",customer.getCurrentMoneyProvided()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        for (Item walt : inventoryToMap) {
-            codePointAndItem.put(walt.getCodePoint(), walt);
+    }
+
+    public void purchaseAudit(Item item, Person customer) {
+        File auditFile = new File("log.txt");
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss ");
+        {
+            try (FileWriter fileWriter = new FileWriter(auditFile, true)) {
+                BufferedReader buffRead = new BufferedReader(new FileReader("log.txt"));
+                PrintWriter writer = new PrintWriter(fileWriter);
+                writer.println(format.format(date) + item.getName() + " "  + item.getCodePoint()  + " $ " + String.format("%.2f",customer.getCurrentMoneyProvided()) + " $ " + String.format("%.2f",(customer.getCurrentMoneyProvided() - item.getPrice())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void returnMoneyAudit(Item item, Person customer) {
+        File auditFile = new File("log.txt");
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss ");
+        {
+            try (FileWriter fileWriter = new FileWriter(auditFile, true)) {
+                BufferedReader buffRead = new BufferedReader(new FileReader("log.txt"));
+                PrintWriter writer = new PrintWriter(fileWriter);
+                writer.println(format.format(date) + "WALT'S CHANGE " + "$" + String.format("%.2f",customer.getCurrentMoneyProvided()) +  " $ "  + "$0.00");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    public Map<String, Item> displayInventory() {
+        for (Item item : inventory) {
+            codePointAndItem.put(item.getCodePoint(), item);
         }
         for(String codePoint : codePointAndItem.keySet()){
             String name = codePointAndItem.get(codePoint).getName();
             double price = codePointAndItem.get(codePoint).getPrice();
             int stock = codePointAndItem.get(codePoint).getStock();
 
-            System.out.println(codePoint + ") " + name + " || Price: $" + price + " || Quantity left: " + stock);
+
+            System.out.println(codePoint + ") " + name + " || Price: $" + String.format("%.2f", price) + " || Quantity left: " + stock);
         }
         return codePointAndItem;
     }
-    public void addInventory(){
 
-    }
     public void dispenseItem(Item item){
         System.out.println("'" + item.getName() + "'  Cost: $" + item.getPrice());
-        item.setStock(item.getStock() - 1);
+//        item.setStock(item.getStock() - 1);
         if(item.getType().equalsIgnoreCase("chip")){
             System.out.println("Crunch Crunch, Walt!");
         }else if(item.getType().equalsIgnoreCase("candy")){
@@ -52,13 +93,38 @@ public class VendingMachine{
         }
 
     }
-    public void finishTransaction(){
-
-
-    }
     public void updateStock(Item item){
+        if(item.getStock() <= 0){
+            System.out.println("This is sold out!");
+        }
         item.setStock(item.getStock() - 1);
 
+    }
+
+    public void returnChange(Person customer){
+        double quarter = 0.25;
+        double dime = 0.10;
+        double nickel = 0.05;
+        int amountOfQuarters = 0;
+        int amountOfDimes = 0;
+        int amountOfNickels = 0;
+
+        double money = customer.getCurrentMoneyProvided();
+
+        if(money % quarter == 0) {
+            amountOfQuarters = (int) (money / quarter);
+        }else {
+
+            while (money > 0) {
+                
+
+            }
+        }
+
+
+
+        System.out.println("Here is " + amountOfQuarters + " Quarters, " + amountOfDimes + " dimes, "
+        + amountOfNickels + " nickels... We don't do pennies. ");
     }
 
 }

@@ -2,11 +2,13 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.*;
 
-public class Inventory {
+public class Inventory{
     private List<Item> listOfItems = new ArrayList<>();
     private Item item;
+
 
     public Inventory(List<Item> listOfItems) {
         this.listOfItems = listOfItems;
@@ -29,6 +31,7 @@ public class Inventory {
         listOfItems.add(item);
     }
     public List<Item> createInventory(){
+
         File file = new File("vendingmachine.csv");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -39,6 +42,7 @@ public class Inventory {
                 item.setName(words[1]);
                 item.setPrice(Double.parseDouble(words[2]));
                 item.setType(words[3]);
+
 
                 listOfItems.add(item);
             }
