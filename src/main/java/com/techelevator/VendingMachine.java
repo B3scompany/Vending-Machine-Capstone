@@ -93,6 +93,17 @@ public class VendingMachine extends Inventory{
         }
 
     }
+<<<<<<< HEAD
+=======
+    public void finishTransaction(){
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    }
+>>>>>>> 8b532d04e09ccdb9e7a3fc0aff1d955ad720fd74
     public void updateStock(Item item){
         if(item.getStock() <= 0){
             System.out.println("This is sold out!");

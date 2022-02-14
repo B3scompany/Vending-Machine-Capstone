@@ -1,8 +1,5 @@
 package com.techelevator;
 
-import java.util.List;
-import java.util.Scanner;
-
 public class Person {
     private double currency;
     private double currentMoneyProvided;
