@@ -42,24 +42,24 @@ public class Item extends Inventory{
 
     public void setStock(int stock) {this.stock = stock;}
 
-    public void displayNameAndStock(){
-        Map<String, Integer> nameAndStock = new TreeMap<>();
-
-        //Want to be sorted according to codePoint
-        File file = new File("vendingmachine.csv");
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] words = line.split("\\|");
-                nameAndStock.put(words[1], 5);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-        }
-            for(String key : nameAndStock.keySet()){
-                System.out.println("("+key+")" + " Amount left: " + nameAndStock.get(key));
-            }
-    }
+//    public void readInventoryFromFile(){
+//        Map<String, Integer> nameAndStock = new TreeMap<>();
+//
+//        //Want to be sorted according to codePoint
+//        File file = new File("vendingmachine.csv");
+//        try (Scanner scanner = new Scanner(file)) {
+//            while (scanner.hasNextLine()) {
+//                String line = scanner.nextLine();
+//                String[] words = line.split("\\|");
+//                nameAndStock.put(words[1], 5);
+//            }
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not found.");
+//        }
+//            for(String key : nameAndStock.keySet()){
+//                System.out.println("("+key+")" + " Amount left: " + nameAndStock.get(key));
+//            }
+//    }
 
     }
 

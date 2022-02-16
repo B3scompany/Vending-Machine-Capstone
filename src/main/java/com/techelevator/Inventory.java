@@ -26,10 +26,6 @@ public class Inventory{
         return listOfItems;
     }
 
-    public void addToInventory(Item item) {
-        //Will change when we figure out the item class
-        listOfItems.add(item);
-    }
     public List<Item> createInventory(){
 
         File file = new File("vendingmachine.csv");

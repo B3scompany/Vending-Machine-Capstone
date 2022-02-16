@@ -14,10 +14,6 @@ public class VendingMachineUI {
 
 
     public void displayMainMenu() {
-        Inventory inventory = new Inventory();
-        List<Item> listOfItems = new ArrayList<>();
-        listOfItems.addAll(inventory.createInventory());
-
         System.out.println();
         System.out.println("Welcome to The Vendo-Matic 800!");
         System.out.println("> (1) Display Vending Machine Items");
@@ -122,7 +118,6 @@ public class VendingMachineUI {
         } else if (userChoice.equalsIgnoreCase("2")) {
             purchaseMenu.putAll(vendingMachine.displayInventory());
 
-
             System.out.println();
             System.out.println("What do you want to buy? Select an option between A1 --> D4: ");
             System.out.println("Spendable Money: $" + String.format("%.2f", customer.getCurrentMoneyProvided()));
@@ -151,8 +146,6 @@ public class VendingMachineUI {
                         customer.setCurrentMoneyProvided(moneyRemaining);
                         vendingMachine.updateStock(purchaseMenu.get(choice));
                         displayPurchaseProcessingMenu();
-
-
                 }
             }
             if (!purchaseMenu.containsKey(pickedItem)) {

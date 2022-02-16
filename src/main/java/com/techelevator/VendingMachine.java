@@ -30,7 +30,6 @@ public class VendingMachine extends Inventory{
                 e.printStackTrace();
             }
         }
-
     }
 
     public void purchaseAudit(Item item, Person customer) {
@@ -46,7 +45,6 @@ public class VendingMachine extends Inventory{
                 e.printStackTrace();
             }
         }
-
     }
 
     public void returnMoneyAudit(Item item, Person customer) {
@@ -73,7 +71,6 @@ public class VendingMachine extends Inventory{
             double price = codePointAndItem.get(codePoint).getPrice();
             int stock = codePointAndItem.get(codePoint).getStock();
 
-
             System.out.println(codePoint + ") " + name + " || Price: $" + String.format("%.2f", price) + " || Quantity left: " + stock);
         }
         return codePointAndItem;
@@ -93,7 +90,6 @@ public class VendingMachine extends Inventory{
         }
 
     }
-
     public void updateStock(Item item){
         if(item.getStock() <= 0){
             System.out.println("This is sold out!");
@@ -131,8 +127,6 @@ public class VendingMachine extends Inventory{
 
             }
         }
-
-
         System.out.println("Here is " + amountOfQuarters + " Quarters, " + amountOfDimes + " dimes, "
         + amountOfNickels + " nickels... We don't do pennies. ");
     }

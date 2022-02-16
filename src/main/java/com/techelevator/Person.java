@@ -9,10 +9,6 @@ public class Person {
         this.currency = currency;
 
     }
-    public Person(){
-
-    }
-
     public void setCurrentMoneyProvided(double currentMoneyProvided) {
         this.currentMoneyProvided = currentMoneyProvided;
     }
