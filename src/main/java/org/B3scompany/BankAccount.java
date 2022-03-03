@@ -1,4 +1,4 @@
-package com.techelevator;
+package org.B3scompany;
 
 public class BankAccount {
 

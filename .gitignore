@@ -22,7 +22,7 @@ Thumbs.db
 *.ilk
 *.log
 *.dll
-!TechElevator*.dll
+
 *.lib
 *.sbr
 bin/

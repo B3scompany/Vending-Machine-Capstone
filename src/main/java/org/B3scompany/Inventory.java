@@ -1,8 +1,7 @@
-package com.techelevator;
+package org.B3scompany;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class Inventory{

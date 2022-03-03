@@ -1,8 +1,4 @@
-package com.techelevator;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
+package org.B3scompany;
 
 public class Item extends Inventory{
     private String codePoint;
